@@ -1,0 +1,31 @@
+.body {
+    background-color: #fff;
+}
+
+#container {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #e5e7eb;
+    width: 1280px;
+    height: 720px;
+}
+
+#calculator-input-textbox {
+    width: 500px;
+    height: 50px;
+    font-size: 2rem;
+}
+
+#calculator-input-textbox:invalid {
+    width: 500px;
+    height: 50px;
+    font-size: 2rem;
+    color: #f00
+}
+
+#calculator-output-display {
+    margin: 50px;
+}

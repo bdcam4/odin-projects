@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="body">
+     <script src="PaperScissorsRock.js"></script>
+
+     <div class="main-panel">
+        <div class="top">
+            <div class="top-title">Paper Scissors Rock</div>
+            <div class="top-text">Well then, you're gonna wanna pick one of those there available options...</div>
+            <div class="top-result"><span id="matchup-text">doing?</span></div>
+            <div class="bottom-result"><span id="result-text">go go go</span></div>
+        </div>
+        <div class="buttons-panel">
+            <div class="button paper">
+                <img src="images/paper-transparent.png" onclick="playRound('paper',computerPlay())">
+            </div>
+            <div class="button scissors">
+                <img src="images/scissors-transparent.png" onclick="playRound('scissors',computerPlay())">
+            </div>
+            <div class="button rock">
+                <img src="images/rock-transparent.png" onclick="playRound('rock',computerPlay())">
+            </div>
+        </div>
+        <div class="results">
+            <div class="tally human">
+                <div class="tally-text">Human</div>
+                <div class="tally-text"><span id="humanTally"></span></div>
+                <img id="humanTallyImage" src="images/tally0.png">
+            </div>
+            <div class="tally computer">
+                <div class="tally-text">Computer</div>
+                <div class="tally-text"><span id="computerTally"></span></div>
+                <img id="computerTallyImage" src="images/tally0.png">
+            </div>
+        </div>
+     </div>
+
+</body>
+</html>
