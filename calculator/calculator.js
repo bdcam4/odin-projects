@@ -1,7 +1,6 @@
 /*
 *
 *   The Odin Project
-* 
 *   Calculator  
 *
 * updateValue()         Sanitise user input and push to array,
