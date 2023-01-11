@@ -7,10 +7,11 @@
 *
 */
 
-const neuromancer = new Book('Neuromancer', 'William Gibson', 'read', 271);
-const realityDysfunction = new Book('The Reality Dysfunction', 'Peter F. Hamilton', 'not read', 1223)
+const neuromancer = new Book('Neuromancer', 'William Gibson', 271, 'read');
+const realityDysfunction = new Book('The Reality Dysfunction', 'Peter F. Hamilton', 1223, 'not read')
+const beforeTheCoffeeGetsCold = new Book('Before the Coffee Gets Cold', 'Toshikazu Kawaguchi', 213, 'false');
 
-let myLibrary = [neuromancer,realityDysfunction];
+let myLibrary = [neuromancer,realityDysfunction,beforeTheCoffeeGetsCold];
 
 // 'Book' object constructor
 function Book(title, author, pages, status) {
@@ -20,30 +21,36 @@ function Book(title, author, pages, status) {
     this.status = status
 };
 
-function addBookToLibrary(title,author,pages,status) {
-    // let title = document.getElementbyId('title');
-    // let author = document.getElementById('author');
-    // let pages = document.getElementById('pages');
-    // let status = document.getElementById('status');
+function addBookToLibrary() {
+    let title = document.getElementById('title').value;
+    let author = document.getElementById('author').value;
+    let pages = document.getElementById('pages').value;
+    let status = document.querySelector('input[name="status"]:checked').value;
 
-    myLibrary.push(new Book(title,author,pages,status))
+    myLibrary.push(new Book(title, author, pages, status));
+    
+    displayLibrary();
+
 };
 
-addBookToLibrary('Before the Coffee Gets Cold', 'Toshikazu Kawaguchi', 'currently reading', 213);
-console.log(myLibrary)
+function displayLibrary(){
+    for (i=0; i<myLibrary.length; i++){
+        console.log(myLibrary[i])
+    }
+}
 
 
 /*
 *
 *   To-do
 *
-* header panel with stats (total books, total pages, avg pages)
+* sanitise user input
+*
 * simple but neat table displaying myLibrary 
 * small 'x' button to remove entries 
 *
 * add book button
 * popup or fixed panel?
-* submit button triggers addBookToLibrary()
 *
 * add dark mode switch >:)
 *

@@ -18,21 +18,26 @@
         </ul>
     </div>
     
-    <div id="container">
-        <form action="URL">
+    <div id="form-container">
+        <form onsubmit="addBookToLibrary()">
             <label for="title">Title:</label><br>
-            <input type="text" id="title" name="title" value="Neuromancer"><br><br>
+            <input type="text" id="title" name="title" placeholder="Neuromancer"><br><br>
 
-            <label for="author">Author:</label><br>
-            <input type="text" id="author" name="author" value="William Gibson"><br><br>
+            <!-- <label for="author">Author:</label><br> -->
+            <input type="text" id="author" name="author" placeholder="William Gibson"><br><br>
 
-            <label for="status">Status:</label><br>
-            <input type="text" id="status" name="status" value="Read"><br><br>
+            <label for="pages">Pages:</label><br>
+            <input type="number" id="pages" name="pages" placeholder="271"><br><br>
+
+            <input type="radio" id="status-read" name="status" value="true">
+            <label for="status-read">Read</label><br>
+
+            <input type="radio" id="status-not-read" name="status" value="false">
+            <label for="status-not-read">Not Read</label><br><br>
 
             <input type="submit" value="Submit">
         </form> 
     </div>
-
     
     <div id="footer"></div>
 </body>
