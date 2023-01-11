@@ -36,7 +36,7 @@ body {
 
 .header-links {
     color: #544234;
-    font-size: 1.2em;
+    font-size: 1.2rem;
     text-decoration: none;
     list-style-type: none;
     display: flex;
@@ -46,7 +46,7 @@ body {
     cursor: pointer;
 }
 
-#container {
+#form-container {
     margin: auto;
     margin-top: 0.5vh;
     display: flex;
