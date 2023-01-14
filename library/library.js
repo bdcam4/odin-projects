@@ -11,7 +11,7 @@ const neuromancer = new Book('Neuromancer', 'William Gibson', 271, 'read');
 const realityDysfunction = new Book('The Reality Dysfunction', 'Peter F. Hamilton', 1223, 'not read')
 const beforeTheCoffeeGetsCold = new Book('Before the Coffee Gets Cold', 'Toshikazu Kawaguchi', 213, 'false');
 
-let myLibrary = [neuromancer,realityDysfunction,beforeTheCoffeeGetsCold];
+let myLibrary = [neuromancer];
 
 // 'Book' object constructor
 function Book(title, author, pages, status) {
@@ -22,23 +22,42 @@ function Book(title, author, pages, status) {
 };
 
 function addBookToLibrary() {
+    event.preventDefault();
     let title = document.getElementById('title').value;
     let author = document.getElementById('author').value;
-    let pages = document.getElementById('pages').value;
+    let pages = Number(document.getElementById('pages').value);
     let status = document.querySelector('input[name="status"]:checked').value;
 
-    myLibrary.push(new Book(title, author, pages, status));
+    console.log("before: ")
+    displayLibrary();
     
+    myLibrary.push(new Book(title, author, pages, status));
+
+    console.log("after: ");
     displayLibrary();
 
 };
 
 function displayLibrary(){
-    for (i=0; i<myLibrary.length; i++){
-        console.log(myLibrary[i])
+    myLibrary.forEach(element => console.log(element))
+}
+
+function addTableRow(e){
+    let table = document.getElementById('table-container');
+    let row = document.createElement('tr');
+    table.appendChild(row);
+    for(const n of ['title', 'author', 'pages', 'status']) {
+        let cell = document.createElement('td');
+        row.appendChild(cell).innerHTML = e[n]
     }
 }
 
+let array = [];
+
+function addToArray(x){
+    array.push(x);
+    array.push(new Book("title","author", "123", "read"))
+}
 
 /*
 *
@@ -46,7 +65,7 @@ function displayLibrary(){
 *
 * sanitise user input
 *
-* simple but neat table displaying myLibrary 
+* generate simple but neat table displaying myLibrary 
 * small 'x' button to remove entries 
 *
 * add book button

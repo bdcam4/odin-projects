@@ -10,7 +10,7 @@
 </head>
 <body>
     <div id="header">
-        <div class="header-logo"><span class="header-light">doog</span><span class="header-bold">reads</span></div>
+        <div class="header-logo"><span class="header-logo-light">doog</span><span>reads</span></div>
         <ul class="header-links">
             <li>Home</li>
             <li>My Books</li>
@@ -19,24 +19,33 @@
     </div>
     
     <div id="form-container">
-        <form onsubmit="addBookToLibrary()">
+        <form action="#" onsubmit="addBookToLibrary()">
             <label for="title">Title:</label><br>
             <input type="text" id="title" name="title" placeholder="Neuromancer"><br><br>
 
-            <!-- <label for="author">Author:</label><br> -->
+            <label for="author">Author:</label><br>
             <input type="text" id="author" name="author" placeholder="William Gibson"><br><br>
 
             <label for="pages">Pages:</label><br>
             <input type="number" id="pages" name="pages" placeholder="271"><br><br>
 
-            <input type="radio" id="status-read" name="status" value="true">
+            <input type="radio" id="status-read" name="status" value="read">
             <label for="status-read">Read</label><br>
 
-            <input type="radio" id="status-not-read" name="status" value="false">
+            <input type="radio" id="status-not-read" name="status" value="not read">
             <label for="status-not-read">Not Read</label><br><br>
 
             <input type="submit" value="Submit">
         </form> 
+    </div>
+
+    <div id="table-container">
+        <tr>
+            <td>Title</td>
+            <td>Author</td>
+            <td>Pages</td>
+            <td>Status</td>
+        </tr>
     </div>
     
     <div id="footer"></div>
