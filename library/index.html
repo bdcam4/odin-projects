@@ -9,7 +9,7 @@
     <title>Document</title>
 </head>
 <body>
-    <div id="header">
+    <div id="site-header">
         <div class="header-logo"><span class="header-logo-light">doog</span><span>reads</span></div>
         <ul class="header-links">
             <li>Home</li>
@@ -18,6 +18,21 @@
         </ul>
     </div>
     
+    <div id="table-container">
+        <table id="books-table">
+            <thead id="books-header">
+                <tr>
+                    <th class="header title">Title</td>
+                    <th class="header author">Author</td>
+                    <th class="header pages">Pages</td>
+                    <th class="header status">Status</td>
+                    <th class="header"></th>
+                </tr>
+            </thead>
+            <tbody id="books-body"></tbody>
+        </table>
+    </div>
+
     <div id="form-container">
         <form action="#" onsubmit="addBookToLibrary()">
             <label for="title">Title:</label><br>
@@ -39,20 +54,6 @@
         </form> 
     </div>
 
-    <div id="table-container">
-        <table id="books-table">
-            <thead id="books-header">
-                <tr>
-                    <th>Title</td>
-                    <th>Author</td>
-                    <th>Pages</td>
-                    <th>Status</td>
-                </tr>
-            </thead>
-            <tbody id="books-body"></tbody>
-        </table>
-    </div>
-    
     <div id="footer"></div>
 </body>
 </html>

@@ -42,6 +42,9 @@ function addTableRow(e){
         let cell = document.createElement('td');
         row.appendChild(cell).innerHTML = e[n]
     }
+    let cell = document.createElement('td');
+    cell.classList.add('delete-button');
+    row.appendChild(cell).innerHTML = 'x'
 }
 
 function displayLibrary(){
@@ -53,7 +56,6 @@ function displayLibrary(){
 *
 * sanitise user input
 *
-* style table
 * small 'x' button to remove entries 
 *
 * add book button

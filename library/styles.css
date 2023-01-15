@@ -3,11 +3,11 @@ body {
     flex-direction: column;
     margin: 0;
     padding: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: #f9f7f4;
+    font-family: Helvetica, sans-serif;
+    /* background-color: #f9f7f4; */
 }
 
-#header {
+#site-header {
     background-color: #f4f1ea;
     display: flex;
     justify-content: space-around;
@@ -45,30 +45,23 @@ body {
     margin: auto;
     margin-top: 0.5vh;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: #fff;
     border-style: solid;
     border-color: #ebe8d5;
     border-width: 0.1rem;
-    width: 1280px;
-    height: 720px;
+    width: 300px;
+    height: 300px;
 }
 
 #table-container {
+    padding-top: 3rem;
     margin: auto;
     margin-top: 0.5vh;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
     background-color: #fff;
-    border-style: solid;
-    border-color: #ebe8d5;
-    border-width: 0.1rem;
-    width: 1280px;
-    height: 720px;
     font-weight: bold;
 }
 
@@ -76,17 +69,26 @@ body {
     width: 50rem;
 }
 
-#books-header {
+.header {
     color: #382110;
-    /* border-bottom: #ebe8d5; */
-    /* border-bottom-style: solid; */
-}
-
-th {
     border-bottom: #ebe8d5;
     border-bottom-style: solid;
+    text-align: left;
 }
 
 #books-body {
+    color: #00635d;
+    font-weight: lighter;
+}
 
+.delete-button {
+    cursor: pointer;
+}
+
+.title, .author {
+    width: 20rem;
+}
+
+.pages, .status {
+    width: 5rem;
 }
