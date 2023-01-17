@@ -7,10 +7,6 @@
 *
 */
 
-// const neuromancer = new Book('Neuromancer', 'William Gibson', 271, 'read');
-// const realityDysfunction = new Book('The Reality Dysfunction', 'Peter F. Hamilton', 1223, 'not read')
-// const beforeTheCoffeeGetsCold = new Book('Before the Coffee Gets Cold', 'Toshikazu Kawaguchi', 213, 'false');
-
 let myLibrary = [];
 
 // 'Book' object constructor
@@ -30,13 +26,15 @@ function addBookToLibrary() {
     let status = document.querySelector('input[name="status"]:checked').value;
     let newBook = new Book(title, author, pages, status);
     myLibrary.push(newBook);
-    addTableRow(newBook)
+    addTableRow(newBook);
+    runStats();
 };
 
 // generate table row, insert relevant properties
 function addTableRow(e){
     let table = document.getElementById('books-body');
     let row = document.createElement('tr');
+    row.setAttribute('id',`bookId-${myLibrary.length}`)
     table.appendChild(row);
     for(const n of ['title', 'author', 'pages', 'status']) {
         let cell = document.createElement('td');
@@ -44,23 +42,42 @@ function addTableRow(e){
     }
     let cell = document.createElement('td');
     cell.classList.add('delete-button');
+    cell.setAttribute('onclick',`deleteBook(${myLibrary.length})`)
     row.appendChild(cell).innerHTML = 'x'
+
+    document.getElementById(`bookId-${myLibrary.length}`).children[3].setAttribute('onclick',`toggleStatus(${myLibrary.length})`);
 }
 
 function displayLibrary(){
     myLibrary.forEach(element => console.log(element))
 }
-/*
-*
-*   To-do
-*
-* sanitise user input
-*
-* small 'x' button to remove entries 
-*
-* add book button
-* popup or fixed panel?
-*
-* add dark mode switch >:)
-*
-*/
+
+function deleteBook(n) {
+    // myLibrary.splice(n,1);
+    document.getElementById(`bookId-${n}`).remove();
+}
+
+function toggleStatus(n){
+    let currentBookStatus = document.getElementById(`bookId-${n}`).children[3].innerText;
+    switch(currentBookStatus){
+        case 'read':
+            document.getElementById(`bookId-${n}`).children[3].innerText = 'not read';
+            myLibrary[n-1].status = 'not read';
+            break;
+        case 'not read':
+            document.getElementById(`bookId-${n}`).children[3].innerText = 'read';
+            myLibrary[n-1].status = 'read';
+            break;
+    }
+}
+
+
+function runStats() {
+    let totalPages = 0;
+    let avgPages = 0;
+    myLibrary.forEach(element => totalPages+=element.pages);
+    avgPages = Math.round(totalPages/myLibrary.length);
+
+    document.getElementById('total-pages').innerHTML = totalPages;
+    document.getElementById('avg-pages').innerHTML = avgPages
+}
