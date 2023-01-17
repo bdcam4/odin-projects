@@ -6,52 +6,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <script src="library.js"></script>
-    <title>Document</title>
+    <title>doogreads</title>
 </head>
 <body>
     <div id="site-header">
-        <div class="header-logo"><span class="header-logo-light">doog</span><span>reads</span></div>
+        <div class="header-text"><span class="header-text-light">doog</span><span>reads</span></div>
         <ul class="header-links">
             <li>Home</li>
             <li>My Books</li>
-            <li>Stats</li>
+            <li>Browse</li>
         </ul>
     </div>
-    
-    <div id="table-container">
-        <table id="books-table">
-            <thead id="books-header">
-                <tr>
-                    <th class="header title">Title</td>
-                    <th class="header author">Author</td>
-                    <th class="header pages">Pages</td>
-                    <th class="header status">Status</td>
-                    <th class="header"></th>
-                </tr>
-            </thead>
-            <tbody id="books-body"></tbody>
-        </table>
-    </div>
 
-    <div id="form-container">
-        <form action="#" onsubmit="addBookToLibrary()">
-            <label for="title">Title:</label><br>
-            <input type="text" id="title" name="title" placeholder="Neuromancer"><br><br>
+    <div id="main-content-container">
+        <div id="form-container" class="side-panel">
+            <form action="#" onsubmit="addBookToLibrary()">
+                <label for="title">Title:</label><br>
+                <input type="text" id="title" name="title" placeholder="Neuromancer"><br><br>
 
-            <label for="author">Author:</label><br>
-            <input type="text" id="author" name="author" placeholder="William Gibson"><br><br>
+                <label for="author">Author:</label><br>
+                <input type="text" id="author" name="author" placeholder="William Gibson"><br><br>
 
-            <label for="pages">Pages:</label><br>
-            <input type="number" id="pages" name="pages" placeholder="271"><br><br>
+                <label for="pages">Pages:</label><br>
+                <input type="number" id="pages" name="pages" placeholder="271"><br><br>
 
-            <input type="radio" id="status-read" name="status" value="read">
-            <label for="status-read">Read</label><br>
+                <input type="radio" id="status-read" name="status" value="read">
+                <label for="status-read">Read</label><br>
 
-            <input type="radio" id="status-not-read" name="status" value="not read">
-            <label for="status-not-read">Not Read</label><br><br>
+                <input type="radio" id="status-not-read" name="status" value="not read">
+                <label for="status-not-read">Not Read</label><br><br>
 
-            <input type="submit" value="Submit">
-        </form> 
+                <input type="submit" value="Submit">
+            </form> 
+        </div>
+
+        <div id="table-container">
+            <table id="books-table">
+                <thead id="books-header">
+                    <tr>
+                        <th class="header title">Title</td>
+                        <th class="header author">Author</td>
+                        <th class="header pages">Pages</td>
+                        <th class="header status">Status</td>
+                        <th class="header">x</th>
+                    </tr>
+                </thead>
+                <tbody id="books-body"></tbody>
+            </table>
+        </div>
+        <div id="stats-container" class="side-panel">
+            <ul class="stats header-text">
+                <li>Total Pages</li>
+                <li id="total-pages">0</li>
+                <li>Average Pages</li>
+                <li id="avg-pages">0</li>
+            </ul>
+            <div class="quote header-text">
+                <q>Swag resists simplicity.</q>
+                <p>– John "Swagman" Green</p>
+            </div>
+        </div>
+
     </div>
 
     <div id="footer"></div>
