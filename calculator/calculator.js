@@ -51,65 +51,98 @@ function evaluateEquation(arrayOfMath){
 //   operator cases
   switch(equation.path[1]) {
       case "*": 
-        equation.solution = multiply(a,b);
+        equation.solution = calculator.multiply(a,b);
         break;
       case "/": 
-        equation.solution = divide(a,b);
+        equation.solution = calculator.divide(a,b);
         break;
       case "^": 
-        equation.solution = power(a,b);
+        equation.solution = calculator.power(a,b);
         break;
       case "+": 
-        equation.solution = add(a,b);
+        equation.solution = calculator.add(a,b);
         break;
       case "-":
-        equation.solution = subtract(a,b);
+        equation.solution = calculator.subtract(a,b);
         break;
       case "!":
-        equation.solution = factorial(a)
+        equation.solution = calculator.factorial(a)
         break;
     };
     return equation
-}
-
-
+};
 
 /*
 *
-*   Calculation functions
+* Calculations (Module pattern IIFE)
 *
 */
 
-function add(a,b){
-    return a+b
-}
-
-function subtract(a,b){
-    return a-b
-}
-
-function multiply(a,b){
-    return a*b
-}
-
-function divide(a,b){
-    return a/b
-}
-
-function power(x,y) {
-  let result = 1;
-  for (i=0; i<y; i++) {
-    result = result * x
+const calculator = (() => {
+  const add      = (a,b) => a + b;
+  const subtract = (a,b) => a - b;
+  const divide   = (a,b) => a / b;
+  const multiply = (a,b) => a * b;
+  const power    = (a,b) => {
+    let result = 1;
+    for (i=0; i<b; i++) {
+      result = result * a
+    };
+    return result	
   };
-  return result	
-};
-
-function factorial(x) {
-    let currentFactor = x;
+  const factorial = (a) => {
+    let currentFactor = a;
     let result = 1;
     while (currentFactor>0){
       result = result * currentFactor
       currentFactor = currentFactor - 1;
     };
     return result
-};
+  };
+  return {
+    add,
+    subtract,
+    divide,
+    multiply,
+    power,
+    factorial,
+  };
+})();
+
+
+
+
+
+// function add(a,b){
+//     return a+b
+// }
+
+// function subtract(a,b){
+//     return a-b
+// }
+
+// function multiply(a,b){
+//     return a*b
+// }
+
+// function divide(a,b){
+//     return a/b
+// }
+
+// function power(x,y) {
+//   let result = 1;
+//   for (i=0; i<y; i++) {
+//     result = result * x
+//   };
+//   return result	
+// };
+
+// function factorial(x) {
+//     let currentFactor = x;
+//     let result = 1;
+//     while (currentFactor>0){
+//       result = result * currentFactor
+//       currentFactor = currentFactor - 1;
+//     };
+//     return result
+// };
