@@ -1,17 +1,17 @@
 
 
-const GameInit = (() => {
+const Game = (() => {
+    const gameBoard = Array.from(Array(3), () => new Array(3));
     const gameState = {};
-    const gameBoard = [];
     
-    const generateGridArray = (x,y) => {
+    const generateGrid = (x,y) => {
         for (i = 0; i < x; i++){
             let row = document.createElement('div');
             row.classList.add('row');
             for (j = 0; j < y; j++){
                 let cell = document.createElement('div');
                 cell.classList.add('gridsquare');
-                cell.setAttribute('onclick', `someFunction(${i}-${j})`);
+                cell.setAttribute('onclick', `Game.playMove(${i},${j})`);
                 cell.setAttribute('id',`cell#${i}-${j}`);
                 row.appendChild(cell);
             }
@@ -19,36 +19,42 @@ const GameInit = (() => {
         } document.getElementById('button').remove();
     };
 
-    return {
-        generateGridArray,
-    }
-})();
-
-
-const Game = (() => {
-
     const checkGameState = () => {
         Object.values(gameState).forEach(rowSum => {
-            if (rowSum === 0 | rowSum === 3){
+            if (rowSum === 3 | rowSum === 30){
                 console.log('we have a winner!')
             }
         })
+    };
+
+    const updateGameBoard = (x,y) => {
+        switch(expression) {
+            case X:
+                gameBoard[x][y] === 'X';
+            break;
+            case O:
+                gameBoard[x][y] === 'O';
+            break;
+        }
+        
     }
 
-    const PlayerFactory = () => {
-        const playMove = (gridPosition) => {
-            // document.getElementById(`cell#${gridPosition}`);
-            console.log(`cell #${gridPosition} is selected`)
-        };
-    }
+    const playMove = (x,y) => {
+        let currentMove = document.getElementById(`cell#${x}-${y}`);
+        currentMove.classList.add('played');
+        currentMove.removeAttribute("onclick"); 
+        // console.log(`x: ${x}, y: ${y}`);
+        // console.log(currentMove)
+    };
 
-    const playX = PlayerFactory();
-    const playO = PlayerFactory();
-
+    const displayBoard = () => {
+        console.log(gameBoard)
+    };
 
     return {
-      checkGameState,
-      playX,
-      playO,
-    };
-  })();
+        generateGrid,
+        checkGameState,
+        playMove,
+        displayBoard,
+    }
+})();
