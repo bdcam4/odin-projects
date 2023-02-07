@@ -2,7 +2,7 @@
 
 const Game = (() => {
     const gameBoard = Array.from(Array(3), () => new Array(3));
-    const gameState = {};
+    let currentPlayer = 'X'
     
     const generateGrid = (x,y) => {
         for (i = 0; i < x; i++){
@@ -19,21 +19,16 @@ const Game = (() => {
         } document.getElementById('button').remove();
     };
 
-    const checkGameState = () => {
-        Object.values(gameState).forEach(rowSum => {
-            if (rowSum === 3 | rowSum === 30){
-                console.log('we have a winner!')
-            }
-        })
-    };
-
     const updateGameBoard = (x,y) => {
-        switch(expression) {
-            case X:
-                gameBoard[x][y] === 'X';
+        // console.log(`updateGameBoard - ${currentPlayer}, x: ${x}, y: ${y}`)
+        switch(currentPlayer) {
+            case 'X':
+                gameBoard[x][y] = 'X';
+                currentPlayer = 'O';
             break;
-            case O:
-                gameBoard[x][y] === 'O';
+            case 'O':
+                gameBoard[x][y] = 'O';
+                currentPlayer = 'X';
             break;
         }
         
@@ -42,19 +37,63 @@ const Game = (() => {
     const playMove = (x,y) => {
         let currentMove = document.getElementById(`cell#${x}-${y}`);
         currentMove.classList.add('played');
-        currentMove.removeAttribute("onclick"); 
-        // console.log(`x: ${x}, y: ${y}`);
-        // console.log(currentMove)
+        currentMove.removeAttribute("onclick");
+        // console.log(`playMove - ${currentPlayer}, x: ${x}, y: ${y}`);
+        updateGameBoard(x,y);
     };
 
     const displayBoard = () => {
         console.log(gameBoard)
     };
 
+    const evaluateAxis = (modifier,x,y) => {
+        for (i=0; i<3; i++){
+            if (gameBoard[x][y] === ???)
+        }
+    }
+
+    const evaluateBoardState = () => {
+        const modifier = {
+            'diagonal1': [1,1],
+            'diagonal2': [1,-1],
+            'row':       [1,0],
+            'column':    [0,1]
+        };
+        evaluateAxis(modifier.row,0,0);
+        evaluateAxis(modifier.row,0,1);
+        evaluateAxis(modifier.row,0,2);
+        evaluateAxis(modifier.column,0,0);
+        evaluateAxis(modifier.column,1,0);
+        evaluateAxis(modifier.column,2,0);
+        evaluateAxis(modifier.diagonal1,0,0);
+        evaluateAxis(modifier.diagonal2,0,2);
+    }
+
     return {
         generateGrid,
-        checkGameState,
         playMove,
+        evaluateBoardState,
         displayBoard,
     }
 })();
+
+// Couldn't make this idea work out neatly unfortunately
+//
+//     const gameState = {
+//         'row1': 0,
+//         'row2': 0,
+//         'row3': 0,
+//         'column1': 0,
+//         'column2': 0,
+//         'column3': 0,
+//         'diagonal1': 0,
+//         'diagonal2': 0,        
+//     };
+//
+//     const checkGameState = () => {
+//             Object.values(gameState).forEach(rowSum => {
+//             if (rowSum === 3 | rowSum === 30){
+//                 console.log('we have a winner!')
+//             }
+//         })
+//     };
