@@ -30,9 +30,17 @@
 }
 
 .gridsquare:hover {
+    background-color: #fff;
+}
+
+.playedX {
     background-color: #00f;
 }
 
-.played {
-    background-color: #00f;
+.playedO {
+    background-color: #0ff;
+}
+
+.win {
+    background-color: green;
 }
