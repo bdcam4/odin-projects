@@ -1,8 +1,16 @@
 
 
 const Game = (() => {
-    const gameBoard = Array.from(Array(3), () => new Array(3));
+    // const gameBoard = Array.from(Array(3), () => new Array(3));
     let currentPlayer = 'X'
+
+
+    const gameBoard = [
+        ['1','2','3'],
+        ['4','5','6'],
+        ['7','8','9']
+    ]
+
     
     const generateGrid = (x,y) => {
         for (i = 0; i < x; i++){
@@ -20,7 +28,6 @@ const Game = (() => {
     };
 
     const updateGameBoard = (x,y) => {
-        // console.log(`updateGameBoard - ${currentPlayer}, x: ${x}, y: ${y}`)
         switch(currentPlayer) {
             case 'X':
                 gameBoard[x][y] = 'X';
@@ -38,7 +45,6 @@ const Game = (() => {
         let currentMove = document.getElementById(`cell#${x}-${y}`);
         currentMove.classList.add('played');
         currentMove.removeAttribute("onclick");
-        // console.log(`playMove - ${currentPlayer}, x: ${x}, y: ${y}`);
         updateGameBoard(x,y);
     };
 
@@ -47,9 +53,21 @@ const Game = (() => {
     };
 
     const evaluateAxis = (modifier,x,y) => {
-        for (i=0; i<3; i++){
-            if (gameBoard[x][y] === ???)
+        let currentAxis = [];
+        for (i=1; i<=3; i++){
+            current = gameBoard[y][x];
+            currentAxis.push(current);
+            console.log(`i: ${i} @ gameBoard[${y}][${x}]: ${gameBoard[y][x]}`);
+            x += modifier[0];
+            y += modifier[1];
         }
+
+        console.log(`currentAxis : ${currentAxis}`);
+        
+        //   for (const n of currentAxis){
+        //     if (currentAxis[n] === currentAxis[n-1]) return true
+        //   }
+
     }
 
     const evaluateBoardState = () => {
@@ -62,11 +80,11 @@ const Game = (() => {
         evaluateAxis(modifier.row,0,0);
         evaluateAxis(modifier.row,0,1);
         evaluateAxis(modifier.row,0,2);
-        evaluateAxis(modifier.column,0,0);
-        evaluateAxis(modifier.column,1,0);
-        evaluateAxis(modifier.column,2,0);
-        evaluateAxis(modifier.diagonal1,0,0);
-        evaluateAxis(modifier.diagonal2,0,2);
+        // evaluateAxis(modifier.column,0,0);
+        // evaluateAxis(modifier.column,1,0);
+        // evaluateAxis(modifier.column,2,0);
+        // evaluateAxis(modifier.diagonal1,0,0);
+        // evaluateAxis(modifier.diagonal2,0,2);
     }
 
     return {
