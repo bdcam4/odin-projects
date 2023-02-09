@@ -3,14 +3,14 @@
 }
 
 #game-container {
-    margin: auto;
+    margin: 200px auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #e5e7eb;
-    width: 1280px;
-    height: 720px;
+    background-color: #fff;
+    width: 200px;
+    height: 200px;
 }
 
 .row {
@@ -20,17 +20,14 @@
 
 .gridsquare {
     /* background-color: #e5e7eb; */
-    background-color: #f00;
+    background-color: #e5e7eb;
     outline-color: #e5e7eb;
     outline-width: 1px;
     outline-style: solid;
     height: 50px;
     width: 50px;
     cursor: pointer;
-}
-
-.gridsquare:hover {
-    background-color: #fff;
+    margin: 3px;
 }
 
 .playedX {
