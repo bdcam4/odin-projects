@@ -36,7 +36,7 @@ const Game = (() => {
 
     const updateGameBoard = (y,x) => {
         let currentMove = document.getElementById(`cell#${y}-${x}`);
-        currentMove.classList.add(`played${currentPlayer}`)
+        currentMove.classList.add(`played${currentPlayer}`);
         currentMove.removeAttribute("onclick");
     };
 
@@ -94,28 +94,5 @@ const Game = (() => {
     return {
         generateGrid,
         playMove,
-        evaluateBoardState,
-        displayBoard,
     }
 })();
-
-// Couldn't make this idea work out neatly unfortunately
-//
-//     const gameState = {
-//         'row1': 0,
-//         'row2': 0,
-//         'row3': 0,
-//         'column1': 0,
-//         'column2': 0,
-//         'column3': 0,
-//         'diagonal1': 0,
-//         'diagonal2': 0,        
-//     };
-//
-//     const checkGameState = () => {
-//             Object.values(gameState).forEach(rowSum => {
-//             if (rowSum === 3 | rowSum === 30){
-//                 console.log('we have a winner!')
-//             }
-//         })
-//     };
