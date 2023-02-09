@@ -19,23 +19,23 @@ const Game = (() => {
         } document.getElementById('button').remove();
     };
 
-    const playMove = (x,y) => {
-        updateGameBoard(x,y)
-        // evaluateBoardState();
+    const playMove = (y,x) => {
+        updateGameBoard(y,x); 
         switch(currentPlayer) {
             case 'X':
-                gameBoard[x][y] = 'X';
+                gameBoard[y][x] = 'X';
                 currentPlayer = 'O';
             break;
             case 'O':
-                gameBoard[x][y] = 'O';
+                gameBoard[y][x] = 'O';
                 currentPlayer = 'X';
             break;
         }
+        evaluateBoardState()
     }
 
-    const updateGameBoard = (x,y) => {
-        let currentMove = document.getElementById(`cell#${x}-${y}`);
+    const updateGameBoard = (y,x) => {
+        let currentMove = document.getElementById(`cell#${y}-${x}`);
         currentMove.classList.add(`played${currentPlayer}`)
         currentMove.removeAttribute("onclick");
     };
@@ -44,17 +44,17 @@ const Game = (() => {
         console.log(gameBoard)
     };
 
-    const evaluateAxis = (modifier,x,y) => {
+    const evaluateAxis = (modifier,y,x) => {
         let currentAxis = [];
-        let initialCell = [x,y];
+        let initialCell = [y,x];
         for (i=1; i<=3; i++){
             currentCell = gameBoard[y][x];
+            if (typeof currentCell === 'undefined') {return};
             currentAxis.push(currentCell);
-            x += modifier[0];
-            y += modifier[1];
+            x += modifier[1];
+            y += modifier[0];
         }
         if (currentAxis.every( (value, i, arr) => value === arr[0] )) {
-            console.log(currentAxis);
             endGame(modifier,initialCell)
         }
     }
@@ -62,30 +62,32 @@ const Game = (() => {
     const evaluateBoardState = () => {
         const modifier = {
             'diagonal1': [1,1],
-            'diagonal2': [1,-1],
-            'row':       [1,0],
-            'column':    [0,1]
+            'diagonal2': [-1,1],
+            'row':       [0,1],
+            'column':    [1,0]
         };
         evaluateAxis(modifier.row,0,0)
-        evaluateAxis(modifier.row,0,1);
-        evaluateAxis(modifier.row,0,2);
+        evaluateAxis(modifier.row,1,0);
+        evaluateAxis(modifier.row,2,0);
         evaluateAxis(modifier.column,0,0);
-        evaluateAxis(modifier.column,1,0);
-        evaluateAxis(modifier.column,2,0);
+        evaluateAxis(modifier.column,0,1);
+        evaluateAxis(modifier.column,0,2);
         evaluateAxis(modifier.diagonal1,0,0);
-        evaluateAxis(modifier.diagonal2,0,2);
+        evaluateAxis(modifier.diagonal2,2,0);
     }
 
     const endGame = (modifier,initialCell) => {
-        let x = initialCell[0];
-        let y = initialCell[1];
-        let allCells = document.querySelector('.gridsquare');
-        allCells.removeAttribute('onclick');
+        let x = initialCell[1];
+        let y = initialCell[0];
+        let allCells = document.getElementsByClassName('gridsquare');
+        for (n of allCells) {
+            n.removeAttribute('onclick')
+        };
         for (i=1; i<=3; i++){
             let currentWinningCell = document.getElementById(`cell#${y}-${x}`);
             currentWinningCell.classList.add('win')
-            x += modifier[0];
-            y += modifier[1];
+            x += modifier[1];
+            y += modifier[0];
         }
     }
 
