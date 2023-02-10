@@ -5,38 +5,39 @@ const Game = (() => {
     let currentPlayer = 'X'
 
     const generateGrid = (x,y) => {
-        for (i = 0; i < x; i++){
+        for (i = 0; i < y; i++){
             let row = document.createElement('div');
             row.classList.add('row');
-            for (j = 0; j < y; j++){
+            for (j = 0; j < x; j++){
                 let cell = document.createElement('div');
                 cell.classList.add('gridsquare');
                 cell.setAttribute('onclick', `Game.playMove(${i},${j})`);
                 cell.setAttribute('id',`cell#${i}-${j}`);
                 row.appendChild(cell);
+                document.getElementById('game-container').appendChild(row);
             }
-            document.getElementById('game-container').appendChild(row)
-        } document.getElementById('button').remove();
+        } 
+        document.getElementById('button').remove()
     };
 
     const playMove = (y,x) => {
-        updateGameBoard(y,x); 
+        gameBoard[y][x] = `${currentPlayer}`;
+        updateDocument(y,x); 
+        evaluateBoardState();
         switch(currentPlayer) {
             case 'X':
-                gameBoard[y][x] = 'X';
                 currentPlayer = 'O';
             break;
             case 'O':
-                gameBoard[y][x] = 'O';
                 currentPlayer = 'X';
             break;
-        }
-        evaluateBoardState()
+        };
     }
 
-    const updateGameBoard = (y,x) => {
+    const updateDocument = (y,x) => {
         let currentMove = document.getElementById(`cell#${y}-${x}`);
-        currentMove.classList.add(`played${currentPlayer}`);
+        currentMove.classList.add('played');
+        currentMove.innerText = `${currentPlayer}`;
         currentMove.removeAttribute("onclick");
     };
 
@@ -81,11 +82,12 @@ const Game = (() => {
         let y = initialCell[0];
         let allCells = document.getElementsByClassName('gridsquare');
         for (n of allCells) {
-            n.removeAttribute('onclick')
+            n.removeAttribute('onclick');
+            n.classList.add('played')
         };
         for (i=1; i<=3; i++){
             let currentWinningCell = document.getElementById(`cell#${y}-${x}`);
-            currentWinningCell.classList.add('win')
+            currentWinningCell.classList.add('win');
             x += modifier[1];
             y += modifier[0];
         }

@@ -1,5 +1,6 @@
 .body {
     background-color: #fff;
+    
 }
 
 #game-container {
@@ -19,25 +20,22 @@
 }
 
 .gridsquare {
-    /* background-color: #e5e7eb; */
     background-color: #e5e7eb;
-    outline-color: #e5e7eb;
-    outline-width: 1px;
-    outline-style: solid;
     height: 50px;
     width: 50px;
     cursor: pointer;
     margin: 3px;
+    text-align: center;
+    font-family: sans-serif;
+    font-size: 45px;
+    color: grey;
 }
 
-.playedX {
-    background-color: #00f;
-}
-
-.playedO {
-    background-color: #0ff;
+.played {
+    cursor: default;
 }
 
 .win {
-    background-color: green;
+    color: green;
+    cursor: default;
 }
