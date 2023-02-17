@@ -8,10 +8,10 @@
     <script src="script.js"></script>
     <title>Tic Tac Toe</title>
 </head>
-<body>
+<body onload="Game.start()">
 
-    <div id="game-container">
-        <button id="button" onclick="Game.generateGrid(3,3)">Generate Grid</button>
+    <div id="game-wrapper">
+        <div id="game-container"></div>
     </div>
     
 </body>
