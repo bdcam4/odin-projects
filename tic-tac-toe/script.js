@@ -4,6 +4,21 @@ const Game = (() => {
     const gameBoard = Array.from(Array(3), () => new Array(3));
     let currentPlayer = 'X'
 
+    const start = () => {
+        generateGrid(3,3);
+    };
+
+    const restart = () => {
+        let gameWrapper = document.getElementById('game-wrapper');
+        let newContainer = document.createElement('div');
+        let oldContainer = document.getElementById('game-container');
+        oldContainer.removeEventListener('click', Game.restart, {capture: true});
+        oldContainer.remove();
+        newContainer.setAttribute('id','game-container');
+        gameWrapper.appendChild(newContainer);
+        generateGrid(3,3)
+    }
+
     const generateGrid = (x,y) => {
         for (i = 0; i < y; i++){
             let row = document.createElement('div');
@@ -17,7 +32,6 @@ const Game = (() => {
                 document.getElementById('game-container').appendChild(row);
             }
         } 
-        document.getElementById('button').remove()
     };
 
     const playMove = (y,x) => {
@@ -90,11 +104,13 @@ const Game = (() => {
             currentWinningCell.classList.add('win');
             x += modifier[1];
             y += modifier[0];
-        }
+        };
+        document.getElementById('game-container').addEventListener('click', Game.restart, {capture: true});
     }
 
     return {
-        generateGrid,
+        start,
+        restart,
         playMove,
     }
 })();
