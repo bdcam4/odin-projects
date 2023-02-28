@@ -9,12 +9,14 @@
 
 let myLibrary = [];
 
-// 'Book' object constructor
-function Book(title, author, pages, status) {
-    this.title = title,
-    this.author = author,
-    this.pages = pages,
-    this.status = status
+// 'Book' class constructor
+class Book {
+    constructor(title, author, pages, status) {
+        this.title = title,
+        this.author = author,
+        this.pages = pages,
+        this.status = status
+    }
 };
 
 //  create book object from user input, generate table row to display
