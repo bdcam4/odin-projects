@@ -1,5 +1,17 @@
+@font-face {
+
+    font-family: 'MyFont';
+  
+    src: url('./LemonMilk.otf') format('woff2'),
+         url('./RobotoCondensed-Regular.ttf') format('woff');
+  
+    font-weight: 600;
+    font-style: normal;
+  }
+
 .hello {
     color: red;
+    font-family: 'MyFont';
   }
 
 body {
