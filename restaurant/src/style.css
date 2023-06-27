@@ -1,4 +1,70 @@
 
 body {
-    background-color: #808080;
+    margin: 0;
+    padding: 0;
+    font-family: Helvetica, sans-serif;
+    background: url('./dango.png');
+}
+
+#content {
+    display: flex;
+    flex-direction: column;
+}
+
+.site-header {
+    background-color: #e5e7eb;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 16px 0px 16px 0px;
+    width:100%;
+    position:fixed;
+}
+
+.header-logo {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.header-links {
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+    text-decoration: none;
+    cursor: pointer;
+    gap: 24px;
+    margin: 0;
+    padding: 0;
+    font-size: 1.2rem;
+}
+
+.main-content-container {
+    background-color: #fff;
+    margin: 100px auto;
+    /* height: 1000px; */
+    width: 1000px;
+    border: 1px;
+    border-style: solid;
+    border-color: #000;
+}
+
+.menu-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;  
+    font-size: 2em;
+    margin-top: 10px;
+}
+
+.menu-body {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.menu-item {
+    height: 200px;
+    width: 800px;
 }

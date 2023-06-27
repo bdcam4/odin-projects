@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
  module.exports = {
     mode: 'development',
     entry: {
-    index: './src/index.js'
+      index: './src/index.js'
    },
    devtool: 'inline-source-map',
    devServer: {
@@ -19,8 +19,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
    output: {
 
     filename: '[name].bundle.js',
-     path: path.resolve(__dirname, 'dist'),
-     clean: true
+    path: path.resolve(__dirname, 'dist'),
+    clean: true,
    },
    module: {
 
@@ -28,6 +28,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
       {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader'],
+      },
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: 'asset/resource',
       },
     ],
   },
