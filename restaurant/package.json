@@ -18,5 +18,9 @@
     "webpack": "^5.88.0",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.15.1"
+  },
+  "dependencies": {
+    "lit-html": "^2.7.4",
+    "luxon": "^3.3.0"
   }
 }
