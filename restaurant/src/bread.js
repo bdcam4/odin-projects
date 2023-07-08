@@ -6,6 +6,9 @@ import rainbowBread from './furukawa-bakery-rainbow-bread.png';
 import riceBread from './furukawa-bakery-rice-cracker-bread.png';
 import squidBread from './furukawa-bakery-squid-bread.png';
 import thornBread from './furukawa-bakery-thorn-bread.png';
+import bakery from './furukawa-bakery.png';
+import iLoveYourBread from './i-love-your-bread.png';
+import myBreadIsWhat from './my-bread-is-what.jpg';
 import { addImage } from "./addImage";
 
 
@@ -16,17 +19,31 @@ const menu = {
   dinner: [crabBread, squidBread]
 };
 
+const dontLikeBread = document.createElement('div');
+dontLikeBread.innerText = `What if I don't like bread?!`;
+dontLikeBread.setAttribute('id','dontLikeBread');
 
 
 const getBread = () => {
   document.getElementById('main-content-container').innerHTML = breadContent.strings[0];
-  document.getElementById('content-body').appendChild(addImage(bananaBread));
+  document.getElementById('content-body').appendChild(addImage(bakery,'bakery'));
+  document.getElementById('content-body').appendChild(dontLikeBread);
   document.getElementById('breakfast').addEventListener('click', getBreakfastMenu);
   document.getElementById('lunch').addEventListener('click', getLunchMenu);
   document.getElementById('dinner').addEventListener('click', getDinnerMenu);
+  document.getElementById('dontLikeBread').addEventListener('click', myBread);
 };
 
+const myBread = () => {
+  document.getElementById('content-body').innerHTML = '';
+  document.getElementById('content-body').appendChild(addImage(myBreadIsWhat,'myBreadIsWhat'));
+  setTimeout(akioLovesHerBread, 3000)
+}
 
+const akioLovesHerBread = () => {
+  document.getElementById('content-body').innerHTML = '';
+  document.getElementById('content-body').appendChild(addImage(iLoveYourBread,'iLoveYourBread'));
+}
 
 
 const getBreakfastMenu = () => {
@@ -57,7 +74,7 @@ const breadContent = html`
   <div id="lunch">lunch</div>
   <div id="dinner">dinner</div>
 </div>
-<div id="content-body">
+<div id="content-body" class="bread">
 </div>
 
 `;

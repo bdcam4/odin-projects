@@ -11,7 +11,7 @@ const dangoContent = html`
     <div>Dango</div>
     <div>DANGO</div>
 </div>
-    <div class="content-body">
+    <div class="content-body" class="dango">
     <div class="content-item">dango</div>
 <div>
 
