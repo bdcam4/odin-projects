@@ -1,30 +1,36 @@
+import { DateTime } from "luxon";
 
 const myCategories = [];
 
 class todoCategory {
-    constructor(title, description, categoryId) {
+    constructor(title, description, id) {
         this.title = title,
         this.description = description,
-        this.categoryId = categoryId,
+        this.id = id,
         this.todoContainer = []
     }
 };
 
 class Todo {
-    constructor(title, dueDate, priority, status, todoId) {
+    constructor(title, dueDate, priority, status, id) {
         this.title = title,
         this.dueDate = dueDate,
+        // this.dueDate = DateTime.fromISO('user input date'),
         this.priority = priority,
         this.status = status,
-        this.todoId = todoId
+        this.id = id
     }
 };
+
+// Todo.prototype.info = function(){
+//     return `some string`
+// };
 
 const createCategory = () => {
     let title = 'title';
     let description = 'description';
-    let categoryId = myCategories.length;
-    let newCategory = new todoCategory(title, description, categoryId);
+    let id = myCategories.length;
+    let newCategory = new todoCategory(title, description, id);
     myCategories.push(newCategory)
 };
 
@@ -33,12 +39,22 @@ const createTodo = (categoryId) => {
     let dueDate = 'dueDate';
     let priority = 'priority';
     let status = 'status';
-    let todoId = myCategories[categoryId].todoContainer.length;
+    let id = myCategories[categoryId].todoContainer.length;
     // let status = document.querySelector('input[name="status"]:checked').value;
-    let newTodo = new Todo(title, dueDate, priority, status, todoId);
+    let newTodo = new Todo(title, dueDate, priority, status, id);
     myCategories[categoryId].todoContainer.push(newTodo)
 };
 
 createCategory();
 createTodo(0)
 console.log(myCategories[0])
+
+
+
+// function handleChange(event){
+//     // here you can do whatever you want with the value of the input
+//     alert(event.target.value)
+//   }
+  
+//   <input type="date" id='todo_date_input' onchange="handleChange(event)"></input>
+
