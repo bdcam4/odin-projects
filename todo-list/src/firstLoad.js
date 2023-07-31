@@ -3,7 +3,7 @@ import { html } from "lit-html";
 import { header } from "./header";
 
 const mainContentContainer = html`
-  <div id=main-content-container></div>
+  <div id=main_content_container></div>
 `;
 
 const content = document.createElement('div');
@@ -14,7 +14,6 @@ content.innerHTML =
 
 const firstLoad = () => {
     document.body.appendChild(content);
-    // document.getElementById('main-content-container').innerHTML = home.strings[0];
 };
 
 export { firstLoad }
