@@ -1,21 +1,22 @@
 import { html } from "lit-html";
 import { DateTime } from "luxon";
+import { myCategories } from ".";
+import { generateCategoryGrid } from "./display_todo";
 
 const todo_form_content = html`
 
 <div id="todo_form_container">
 
-    <form action="#" onsubmit="callSomeFunction()">
-            <input type="text" id="todo_title_input" name="title" placeholder="title"><br><br>
-            <input type="date" id='todo_date_input' onchange="handleDateInput(event) "></input><br><br>
+            <input type="text" id='todo_title_input' name='title' placeholder='title'>
+            <input type="date" id='todo_date_input'></input>
             <select id="todo_priority_input" name="priority">
                 <option value="low">Low priority</option>
                 <option value="medium">Medium priority</option>
                 <option value="high">High priority</option>
-            </select><br><br>
-            <input type="text" id="todo_description_input" placeholder="description"><br><br>
-            <input type="submit" value="Submit">
-    </form>
+            </select>
+            <input type="text" id="todo_description_input" placeholder="description">
+            <input type="submit" id="todo_form_submit" value="Submit">
+
 </div>
 
 `;
@@ -30,13 +31,13 @@ class TodoCategory {
 };
 
 class Todo {
-    constructor(title, dueDate, priority, description, id) {
+    constructor(title, date, priority, description, id) {
         this.title = title,
-        this.dueDate = DateTime.fromISO(dueDate),
+        this.date = date,
         this.priority = priority,
         this.description = description,
-        this.status = false,
-        this.id = id
+        this.id = id,
+        this.status = false
     }
 };
 
@@ -52,15 +53,33 @@ const createCategory = () => {
     myCategories.push(newCategory)
 };
 
-const createTodo = (categoryId) => {
-    let title = document.getElementById('todo_title_input').value;
-    let dueDate = document.getElementById('todo_date_input').value;
-    let priority = document.getElementById('todo_priority_input').value;
-    let description = document.getElementById('todo_description_input').value;
+const createTodo = (e, categoryId) => {
+    let title = e.title;
+    let date = e.date;
+    let priority = e.priority;
+    let description = e.description;
     let id = myCategories[categoryId].todoContainer.length;
-    let newTodo = new Todo(title, dueDate, priority, description, id);
-    myCategories[categoryId].todoContainer.push(newTodo)
+    let newTodo = new Todo(title, date, priority, description, id);
+    myCategories[categoryId].todoContainer.push(newTodo);
+    console.log(myCategories);
 };
 
+const addListeners = () => { 
+    document.getElementById('todo_form_submit').onclick = (e) => {
+        let form_result = handleFormInput(e);
+        let categoryId = 0;
+        createTodo(form_result,categoryId);
+        generateCategoryGrid();
+    }
+};
 
-export { todo_form_content, Todo, TodoCategory, createTodo, createCategory  }
+const handleFormInput = () => {
+    let title = document.getElementById('todo_title_input').value;
+    let date_string = document.getElementById('todo_date_input').value;
+    let date = DateTime.fromISO(date_string);
+    let priority = document.getElementById('todo_priority_input').value;
+    let description = document.getElementById('todo_description_input').value;
+    return { title, date, priority, description }
+}
+
+export { todo_form_content, addListeners  }
