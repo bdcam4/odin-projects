@@ -1,6 +1,8 @@
 // import { home } from "./home";
 import { html } from "lit-html";
 import { header } from "./header";
+import { todo_form_content } from "./create_todo";
+import { todo_display_content } from "./display_todo";
 
 const mainContentContainer = html`
   <div id=main_content_container></div>
@@ -12,8 +14,11 @@ content.innerHTML =
     header.strings[0]+
     mainContentContainer.strings[0];
 
-const firstLoad = () => {
+const generatePage = () => {
     document.body.appendChild(content);
+    document.getElementById('main_content_container').innerHTML = 
+        todo_form_content.strings[0]+
+        todo_display_content.strings[0];
 };
 
-export { firstLoad }
+export { generatePage }

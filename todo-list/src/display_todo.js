@@ -7,22 +7,26 @@ const todo_display_content = html`
 
 `;
 
-const generateCategoryGrid = () => {
+const generateTodoDisplay = () => {
+    document.getElementById('todo_display_container').innerHTML = todo_display_content.strings[0];
     for (const n of myCategories) {
         let currentCategory = document.createElement('div');
         currentCategory.innerText = 
         n.id+
         n.title+
         n.description;
-        
-        let currentTodos = document.createElement('div');
-        n.todoContainer.forEach(e => currentTodos.innerText += e.title);
+       
+        n.todoContainer.forEach(e => {
+        let newTodoDisplayNode = document.createElement('div');
+        newTodoDisplayNode.classList.add('todo_node');
+        newTodoDisplayNode.innerText += e.title
+        currentCategory.appendChild(newTodoDisplayNode);
+        });
 
         currentCategory.classList.add('todo_display_grid');
-        currentCategory.appendChild(currentTodos);
         document.getElementById('todo_display_container').appendChild(currentCategory)
     }
 }
 
 
-export { todo_display_content, generateCategoryGrid }
+export { todo_display_content, generateTodoDisplay }

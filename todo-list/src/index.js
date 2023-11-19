@@ -1,29 +1,27 @@
 import './style.css';
-
-import { firstLoad } from './firstLoad';
 import { addListeners, todo_form_content } from './create_todo';
-import { generateCategoryGrid, todo_display_content } from './display_todo';
-
+import { generateTodoDisplay, todo_display_content } from './display_todo';
+import { generatePage } from './firstLoad';
 
 console.log('It works!');
-firstLoad();
 
 let myCategories = [
     {
-        'title':        'title0',
+        'title':        '_CATEGORY_',
         'description':  'description0',
         'id':           0,
+        'todoContainer': []
+    },
+    {
+        'title':        '_CATEGORY_',
+        'description':  'description1',
+        'id':           1,
         'todoContainer': []
     }
 ];
 
-document.getElementById('main_content_container').innerHTML = 
-todo_form_content.strings[0]+
-todo_display_content.strings[0];
-
+generatePage();
+generateTodoDisplay();
 addListeners();
-
-generateCategoryGrid();
-
 
 export { myCategories }

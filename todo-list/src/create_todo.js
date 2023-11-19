@@ -1,7 +1,7 @@
 import { html } from "lit-html";
 import { DateTime } from "luxon";
 import { myCategories } from ".";
-import { generateCategoryGrid } from "./display_todo";
+import { generateTodoDisplay } from "./display_todo"
 
 const todo_form_content = html`
 
@@ -13,6 +13,10 @@ const todo_form_content = html`
                 <option value="low">Low priority</option>
                 <option value="medium">Medium priority</option>
                 <option value="high">High priority</option>
+            </select>
+            <select id="todo_category_input" name="category">
+                <option value="0">0</option>
+                <option value="1">1</option>
             </select>
             <input type="text" id="todo_description_input" placeholder="description">
             <input type="submit" id="todo_form_submit" value="Submit">
@@ -53,23 +57,23 @@ const createCategory = () => {
     myCategories.push(newCategory)
 };
 
-const createTodo = (e, categoryId) => {
+const createTodo = (e) => {
     let title = e.title;
     let date = e.date;
     let priority = e.priority;
+    let category = e.category;
     let description = e.description;
-    let id = myCategories[categoryId].todoContainer.length;
+    let id = myCategories[category].todoContainer.length;
     let newTodo = new Todo(title, date, priority, description, id);
-    myCategories[categoryId].todoContainer.push(newTodo);
+    myCategories[category].todoContainer.push(newTodo);
     console.log(myCategories);
 };
 
 const addListeners = () => { 
     document.getElementById('todo_form_submit').onclick = (e) => {
         let form_result = handleFormInput(e);
-        let categoryId = 0;
-        createTodo(form_result,categoryId);
-        generateCategoryGrid();
+        createTodo(form_result);
+        generateTodoDisplay();
     }
 };
 
@@ -79,7 +83,8 @@ const handleFormInput = () => {
     let date = DateTime.fromISO(date_string);
     let priority = document.getElementById('todo_priority_input').value;
     let description = document.getElementById('todo_description_input').value;
-    return { title, date, priority, description }
+    let category = document.getElementById('todo_category_input').value;
+    return { title, date, priority, category, description }
 }
 
 export { todo_form_content, addListeners  }
