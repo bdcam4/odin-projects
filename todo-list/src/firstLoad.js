@@ -15,7 +15,7 @@ content.innerHTML =
     header.strings[0]+
     mainContentContainer.strings[0];
 
-const generatePage = () => {
+function generatePage() {
     document.body.appendChild(content);
     document.getElementById('main_content_container').innerHTML = 
         todo_form_content.strings[0]+

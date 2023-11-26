@@ -7,7 +7,7 @@ const todo_display_content = html`
 
 `;
 
-const generateDisplay = () => {
+function generateDisplay() {
     document.getElementById('todo_display_container').innerHTML = "";
     for (const n of myCategories) {
         let currentCategory = document.createElement('div');

@@ -64,7 +64,7 @@ class Todo {
 //     return `some string`
 // };
 
-const createCategory = (e) => {
+function createCategory(e) {
     let title = e.title;
     let id = myCategories.length;
     let newCategory = new TodoCategory(title, id);
@@ -72,7 +72,7 @@ const createCategory = (e) => {
     console.log(myCategories)
 };
 
-const createTodo = (e) => {
+function createTodo(e) {
     let title = e.title;
     let date = e.date;
     let priority = e.priority;
@@ -84,7 +84,7 @@ const createTodo = (e) => {
     console.log(myCategories)
 };
 
-const addListeners = () => { 
+function addListeners() { 
     document.getElementById('todo_form_submit').onclick = (e) => {
         let todo_form_result = processTodoForm(e);
         createTodo(todo_form_result);
@@ -97,7 +97,7 @@ const addListeners = () => {
     }
 };
 
-const processTodoForm = () => {
+function processTodoForm() {
     let title = document.getElementById('todo_title_input').value;
     let date_string = document.getElementById('todo_date_input').value;
     let date = DateTime.fromISO(date_string);
@@ -107,18 +107,18 @@ const processTodoForm = () => {
     return { title, date, priority, category, description }
 };
 
-const processCategoryForm = () => {
+function processCategoryForm() {
     let title = document.getElementById('category_title_input').value;
     return { title }
 };
 
-function selectTodoNode(x, y) {
+function selectTodoNode(x,y) {
     let currentTodoNode = myCategories[x].todoContainer[y];
     console.log(currentTodoNode)
 
 };
 
-const removeTodo = (e) => {
+function removeTodo(e) {
     document.getElementById(`${e}`).remove();
 };
 
