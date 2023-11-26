@@ -75,3 +75,17 @@ body {
     border-style: solid;
     border-color: #000;
 }
+
+.todo_node:hover {
+    color: #f00;
+}
+
+#todo_editor_container {
+    background-color: #fff;
+    margin: 10px auto;
+    height: 400px;
+    width: 800px;
+    border: 1px;
+    border-style: solid;
+    border-color: #000;
+}

@@ -7,20 +7,22 @@ const todo_display_content = html`
 
 `;
 
-const generateTodoDisplay = () => {
-    document.getElementById('todo_display_container').innerHTML = todo_display_content.strings[0];
+const generateDisplay = () => {
+    document.getElementById('todo_display_container').innerHTML = "";
     for (const n of myCategories) {
         let currentCategory = document.createElement('div');
         currentCategory.innerText = 
         n.id+
-        n.title+
-        n.description;
+        "_"+
+        n.title;
        
         n.todoContainer.forEach(e => {
         let newTodoDisplayNode = document.createElement('div');
         newTodoDisplayNode.classList.add('todo_node');
         newTodoDisplayNode.innerText += e.title
-        currentCategory.appendChild(newTodoDisplayNode);
+        newTodoDisplayNode.setAttribute('id',`${n.id}-${e.id}`);
+        newTodoDisplayNode.setAttribute('onclick',`selectTodoNode(${n.id},${e.id})`);
+        currentCategory.appendChild(newTodoDisplayNode)
         });
 
         currentCategory.classList.add('todo_display_grid');
@@ -28,5 +30,4 @@ const generateTodoDisplay = () => {
     }
 }
 
-
-export { todo_display_content, generateTodoDisplay }
+export { todo_display_content, generateDisplay }

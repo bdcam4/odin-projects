@@ -1,34 +1,49 @@
 import { html } from "lit-html";
 import { DateTime } from "luxon";
 import { myCategories } from ".";
-import { generateTodoDisplay } from "./display_todo"
+import { generateDisplay } from "./display_todo"
 
 const todo_form_content = html`
 
 <div id="todo_form_container">
 
-            <input type="text" id='todo_title_input' name='title' placeholder='title'>
-            <input type="date" id='todo_date_input'></input>
-            <select id="todo_priority_input" name="priority">
-                <option value="low">Low priority</option>
-                <option value="medium">Medium priority</option>
-                <option value="high">High priority</option>
-            </select>
-            <select id="todo_category_input" name="category">
-                <option value="0">0</option>
-                <option value="1">1</option>
-            </select>
-            <input type="text" id="todo_description_input" placeholder="description">
-            <input type="submit" id="todo_form_submit" value="Submit">
+Category
+<div>
+    <input type="text" id='category_title_input' name='title' placeholder='title'>
+    <input type="submit" id="category_form_submit" value="Submit">
+</div>
+Todo
+<div>
+    <input type="text" id='todo_title_input' name='title' placeholder='title'>
+    <input type="date" id='todo_date_input'></input>
+    <select id="todo_priority_input" name="priority">
+        <option value="low">Low priority</option>
+        <option value="medium">Medium priority</option>
+        <option value="high">High priority</option>
+    </select>
+    <select id="todo_category_input" name="category">
+        <option value="0">0</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+    </select>
+    <input type="text" id="todo_description_input" placeholder="description">
+    <input type="submit" id="todo_form_submit" value="Submit">
+</div>
 
 </div>
 
 `;
 
+const todo_editor_content = html`
+<div id='todo_editor_container'>
+    <div></div>
+</div>
+
+`;
+
 class TodoCategory {
-    constructor(title, description, id) {
+    constructor(title, id) {
         this.title = title,
-        this.description = description,
         this.id = id,
         this.todoContainer = []
     }
@@ -49,12 +64,12 @@ class Todo {
 //     return `some string`
 // };
 
-const createCategory = () => {
-    let title = 'title';
-    let description = 'description';
+const createCategory = (e) => {
+    let title = e.title;
     let id = myCategories.length;
-    let newCategory = new TodoCategory(title, description, id);
-    myCategories.push(newCategory)
+    let newCategory = new TodoCategory(title, id);
+    myCategories.push(newCategory);
+    console.log(myCategories)
 };
 
 const createTodo = (e) => {
@@ -66,18 +81,23 @@ const createTodo = (e) => {
     let id = myCategories[category].todoContainer.length;
     let newTodo = new Todo(title, date, priority, description, id);
     myCategories[category].todoContainer.push(newTodo);
-    console.log(myCategories);
+    console.log(myCategories)
 };
 
 const addListeners = () => { 
     document.getElementById('todo_form_submit').onclick = (e) => {
-        let form_result = handleFormInput(e);
-        createTodo(form_result);
-        generateTodoDisplay();
+        let todo_form_result = processTodoForm(e);
+        createTodo(todo_form_result);
+        generateDisplay();
+    };
+    document.getElementById('category_form_submit').onclick = (e) => {
+        let category_form_result = processCategoryForm(e);
+        createCategory(category_form_result);
+        generateDisplay();
     }
 };
 
-const handleFormInput = () => {
+const processTodoForm = () => {
     let title = document.getElementById('todo_title_input').value;
     let date_string = document.getElementById('todo_date_input').value;
     let date = DateTime.fromISO(date_string);
@@ -85,6 +105,21 @@ const handleFormInput = () => {
     let description = document.getElementById('todo_description_input').value;
     let category = document.getElementById('todo_category_input').value;
     return { title, date, priority, category, description }
-}
+};
 
-export { todo_form_content, addListeners  }
+const processCategoryForm = () => {
+    let title = document.getElementById('category_title_input').value;
+    return { title }
+};
+
+function selectTodoNode(x, y) {
+    let currentTodoNode = myCategories[x].todoContainer[y];
+    console.log(currentTodoNode)
+
+};
+
+const removeTodo = (e) => {
+    document.getElementById(`${e}`).remove();
+};
+
+export { todo_form_content, todo_editor_content, addListeners  }
