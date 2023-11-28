@@ -5,21 +5,13 @@ import { generatePage } from './firstLoad';
 
 console.log('It works!');
 
-let myCategories = [
-    {
-        'title':        'CATEGORY',
-        'id':           0,
-        'todoContainer': []
-    },
-    {
-        'title':        'CATEGORY',
-        'id':           1,
-        'todoContainer': []
-    }
-];
+let categories = {
+    // 'CATEGORY0': {},
+    // 'CATEGORY1': {}
+};
 
 generatePage();
 generateDisplay();
 addListeners();
 
-export { myCategories }
+export { categories }

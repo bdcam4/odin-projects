@@ -1,6 +1,6 @@
 import { html } from "lit-html";
 import { DateTime } from "luxon";
-import { myCategories } from ".";
+import { categories } from ".";
 import { generateDisplay } from "./display_todo"
 
 const todo_form_content = html`
@@ -22,9 +22,6 @@ Todo
         <option value="high">High priority</option>
     </select>
     <select id="todo_category_input" name="category">
-        <option value="0">0</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
     </select>
     <input type="text" id="todo_description_input" placeholder="description">
     <input type="submit" id="todo_form_submit" value="Submit">
@@ -41,35 +38,22 @@ const todo_editor_content = html`
 
 `;
 
-class TodoCategory {
-    constructor(title, id) {
-        this.title = title,
-        this.id = id,
-        this.todoContainer = []
-    }
-};
-
 class Todo {
-    constructor(title, date, priority, description, id) {
+    constructor(title, date, priority, description) {
         this.title = title,
         this.date = date,
         this.priority = priority,
         this.description = description,
-        this.id = id,
         this.status = false
     }
 };
 
-// Todo.prototype.info = function(){
-//     return `some string`
-// };
-
 function createCategory(e) {
     let title = e.title;
-    let id = myCategories.length;
-    let newCategory = new TodoCategory(title, id);
-    myCategories.push(newCategory);
-    console.log(myCategories)
+    if (categories[title]) return;
+    categories[title] = {};
+    updateCategories();
+    console.log(categories)
 };
 
 function createTodo(e) {
@@ -78,10 +62,10 @@ function createTodo(e) {
     let priority = e.priority;
     let category = e.category;
     let description = e.description;
-    let id = myCategories[category].todoContainer.length;
-    let newTodo = new Todo(title, date, priority, description, id);
-    myCategories[category].todoContainer.push(newTodo);
-    console.log(myCategories)
+    let newTodo = new Todo(title, date, priority, description);
+
+    categories[category][title] = newTodo;
+    console.log(categories)
 };
 
 function addListeners() { 
@@ -122,4 +106,15 @@ function removeTodo(e) {
     document.getElementById(`${e}`).remove();
 };
 
-export { todo_form_content, todo_editor_content, addListeners  }
+function updateCategories(){
+    let list_of_categories = document.getElementById('todo_category_input');
+    list_of_categories.innerHTML = '';
+    for (const key of Object.keys(categories)) {
+        let current_category = document.createElement('option');
+        current_category.innerText = key.toString();
+        current_category.value = key.toString();
+        list_of_categories.appendChild(current_category)        
+    }
+};
+
+export { todo_form_content, todo_editor_content, addListeners, updateCategories }

@@ -1,9 +1,8 @@
 // import { home } from "./home";
 import { html } from "lit-html";
 import { header } from "./header";
-import { todo_form_content } from "./create_todo";
+import { todo_form_content, todo_editor_content, updateCategories } from "./create_todo";
 import { todo_display_content } from "./display_todo";
-import { todo_editor_content } from "./create_todo";
 
 const mainContentContainer = html`
   <div id=main_content_container></div>
@@ -21,6 +20,7 @@ function generatePage() {
         todo_form_content.strings[0]+
         todo_display_content.strings[0]+
         todo_editor_content.strings[0];
+    updateCategories()
 };
 
 export { generatePage }
