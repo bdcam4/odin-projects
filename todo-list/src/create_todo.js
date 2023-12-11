@@ -52,7 +52,7 @@ function createCategory(e) {
     let title = e.title;
     if (categories[title]) return;
     categories[title] = {};
-    updateCategories();
+    updateCategories('todo_category_input');
     console.log(categories)
 };
 
@@ -97,17 +97,15 @@ function processCategoryForm() {
 };
 
 function selectTodoNode(x,y) {
-    let currentTodoNode = myCategories[x].todoContainer[y];
-    console.log(currentTodoNode)
-
+    return categories[x][y];
 };
 
 function removeTodo(e) {
     document.getElementById(`${e}`).remove();
 };
 
-function updateCategories(){
-    let list_of_categories = document.getElementById('todo_category_input');
+function updateCategories(e){
+    let list_of_categories = document.getElementById(`${e}`);
     list_of_categories.innerHTML = '';
     for (const key of Object.keys(categories)) {
         let current_category = document.createElement('option');
@@ -117,4 +115,4 @@ function updateCategories(){
     }
 };
 
-export { todo_form_content, todo_editor_content, addListeners, updateCategories }
+export { todo_form_content, todo_editor_content, addListeners, updateCategories, selectTodoNode }

@@ -20,7 +20,7 @@ function generatePage() {
         todo_form_content.strings[0]+
         todo_display_content.strings[0]+
         todo_editor_content.strings[0];
-    updateCategories()
+    updateCategories('todo_category_input');
 };
 
 export { generatePage }
