@@ -53,7 +53,6 @@ function createCategory(e) {
     if (categories[title]) return;
     categories[title] = {};
     updateCategories('todo_category_input');
-    console.log(categories)
 };
 
 function createTodo(e) {
@@ -65,7 +64,6 @@ function createTodo(e) {
     let newTodo = new Todo(title, date, priority, description);
 
     categories[category][title] = newTodo;
-    console.log(categories)
 };
 
 function addListeners() { 
@@ -96,15 +94,40 @@ function processCategoryForm() {
     return { title }
 };
 
+function processEditorForm() {    
+    let title = document.getElementById('editor_title_input').value;
+    let date_string = document.getElementById('editor_date_input').value;
+    let date = DateTime.fromISO(date_string);
+    let priority = document.getElementById('editor_priority_input').value;
+    let description = document.getElementById('editor_description_input').value;
+    let category = document.getElementById('editor_category_input').value;
+
+    if (title === null || title === undefined || title.length === 0) {
+        title = document.getElementById('editor_title_input').placeholder;
+    };
+
+    if (date_string === null || date_string === undefined || date_string.length === 0) {
+        date_string = document.getElementById('editor_date_input').placeholder;
+        date = DateTime.fromISO(date_string)
+    };
+
+    if (description === null || description === undefined || description.length === 0) {
+        description = document.getElementById('editor_description_input').placeholder;
+    };
+
+    return { title, date, priority, category, description }
+};
+
 function selectTodoNode(x,y) {
-    return categories[x][y];
+    return {
+        category: categories[x],
+        category_name: x,
+        todo: categories[x][y],
+        todo_name: y
+    }
 };
 
-function removeTodo(e) {
-    document.getElementById(`${e}`).remove();
-};
-
-function updateCategories(e){
+function updateCategories(e) {
     let list_of_categories = document.getElementById(`${e}`);
     list_of_categories.innerHTML = '';
     for (const key of Object.keys(categories)) {
@@ -115,4 +138,12 @@ function updateCategories(e){
     }
 };
 
-export { todo_form_content, todo_editor_content, addListeners, updateCategories, selectTodoNode }
+function editTodoNode(e) {
+    delete categories[e.category_name][e.todo_name];
+    let editor_form_result = processEditorForm(e);
+    createTodo(editor_form_result);
+    generateDisplay();
+    document.getElementById('todo_editor_container').innerHTML = '';
+};
+
+export { todo_form_content, todo_editor_content, addListeners, updateCategories, selectTodoNode, editTodoNode }
