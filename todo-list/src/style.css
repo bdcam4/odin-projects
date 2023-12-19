@@ -76,7 +76,7 @@ body {
     border-color: #000;
 }
 
-.todo_node:hover {
+.todo_node:hover, .edit_button:hover{
     color: #f00;
 }
 

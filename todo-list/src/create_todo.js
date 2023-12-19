@@ -146,4 +146,10 @@ function editTodoNode(e) {
     document.getElementById('todo_editor_container').innerHTML = '';
 };
 
-export { todo_form_content, todo_editor_content, addListeners, updateCategories, selectTodoNode, editTodoNode }
+function deleteTodoNode(e) {
+    delete categories[e.category_name][e.todo_name];
+    generateDisplay();
+    document.getElementById('todo_editor_container').innerHTML = '';
+};
+
+export { todo_form_content, todo_editor_content, addListeners, updateCategories, selectTodoNode, editTodoNode, deleteTodoNode }

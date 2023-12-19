@@ -1,14 +1,12 @@
 import { html } from "lit-html";
 import { categories } from './index';
-import { selectTodoNode, editTodoNode, updateCategories } from './create_todo';
+import { selectTodoNode, editTodoNode, deleteTodoNode, updateCategories } from './create_todo';
 
 const todo_display_content = html`
 
 <div id="todo_display_container"></div>
 
 `;
-
-//<div id="todo_form_container">
 
 const todo_editor_content = html`
 
@@ -24,7 +22,8 @@ const todo_editor_content = html`
     <select id="editor_category_input" name="category">
     </select>
     <input type="text" id="editor_description_input" placeholder="description">
-    <input type="submit" id="editor_form_submit" value="Submit">
+    <input type="submit" id="editor_form_submit" value="Save">
+    <input type="submit" id="editor_delete" value="Delete">
 </div>
 
 </div>
@@ -48,11 +47,41 @@ function generateDisplay() {
             currentCategory.appendChild(newTodoDisplayNode);
 
             document.getElementById(`${i}-${j}`).addEventListener('click', function(){
-                generateEditorDisplay(i,j)
+                // generateEditorDisplay(i,j)
+                generateReadOnlyDisplay(i,j)
             });
         };
     };
 };
+
+function generateReadOnlyDisplay(x,y) {
+    let editor = document.getElementById('todo_editor_container');
+    let editor_node = selectTodoNode(x,y);
+    
+    editor.innerHTML = '';
+    console.log(editor_node);
+
+    let categoryHeader = document.createElement('div');
+    categoryHeader.innerText = editor_node.category_name;
+    editor.appendChild(categoryHeader);
+
+    for (const [key, value] of Object.entries(editor_node.todo)) {
+        let currentNode = document.createElement('div');
+        currentNode.innerText = value;
+        editor.appendChild(currentNode);
+        console.log(`${key}: ${value}`);
+      };
+    
+    let edit_button = document.createElement('div');
+    edit_button.innerText = 'edit';
+    edit_button.classList.add('edit_button');
+    editor.appendChild(edit_button);
+
+    edit_button.addEventListener('click', function(){
+        generateEditorDisplay(editor_node.category_name,editor_node.todo_name)
+    })
+};
+
 
 function generateEditorDisplay(x,y) {
     let editor_node = selectTodoNode(x,y);
@@ -65,8 +94,9 @@ function generateEditorDisplay(x,y) {
     document.getElementById('editor_form_submit').addEventListener('click', function(){
         editTodoNode(editor_node)
     });
-
-    // console.log(categories)
+    document.getElementById('editor_delete').addEventListener('click', function(){
+        deleteTodoNode(editor_node)
+    })
 };
 
 function generatePlaceholders(e) {

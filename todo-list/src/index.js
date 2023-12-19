@@ -5,10 +5,7 @@ import { generatePage } from './firstLoad';
 
 console.log('It works!');
 
-let categories = {
-    // 'CATEGORY0': {},
-    // 'CATEGORY1': {}
-};
+let categories = {};
 
 generatePage();
 generateDisplay();
