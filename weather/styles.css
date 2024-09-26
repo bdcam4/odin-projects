@@ -1,0 +1,110 @@
+@font-face {
+    font-family: 'ubuntu_monospace';
+    src: local('UbuntuMono-B'),
+        url('UbuntuMono-B.ttf');
+}
+
+body {
+    background-color: #181818;
+    margin: 0;
+    padding: 0;
+    font-family: Helvetica, sans-serif;
+}
+
+#console_container {
+    display: flex;
+    justify-content: space-between;
+    background-color: #2c001e;
+    color: #fff;
+    font-family: ubuntu_monospace;
+    margin: 100px auto;
+    width: 1000px;
+    border: 1px;
+    border-style: solid;
+    border-color: #2b2b2b;
+    padding: 5px;
+    cursor: text;
+}
+
+#console_container {
+    height: 300px;
+    flex-direction: column-reverse;
+}
+
+#form_container, #editor_container {
+    gap: 10px;
+}
+
+#console_display {
+    width: 997px;
+    height: 260px;
+    overflow: scroll;
+}
+
+#console_history, #console_input {
+    width: 1000px;
+    height: 20px;
+}
+
+.display_line {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+#console_input, #console_path, #console_history {
+    display: flex;
+    flex-direction: row;
+}
+
+.console_gap {
+    margin-left: 5px;
+}
+
+.consoleGreenText {
+    color: #7b9c24;
+}
+
+.consoleBlueText {
+    color: #3465a4;
+}
+
+.console_priority {
+    width: 32px;
+}
+
+.console_date {
+    width: 88px;
+    text-align: right;
+}
+
+#user_text_input {
+    font-family: ubuntu_monospace;
+    font-size: 1em;
+    background-color: #2c001e;
+    color: #fff;
+    border: none;
+    outline: none;
+    width: 900px;
+}
+
+#close_button {
+    cursor: pointer;
+    align-self:auto
+}
+
+#container {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 1280px;
+    height: 720px;
+}
+
+#search-input-textbox {
+    width: 500px;
+    height: 50px;
+    font-size: 2rem;
+}
